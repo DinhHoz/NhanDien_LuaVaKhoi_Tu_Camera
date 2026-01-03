@@ -90,7 +90,7 @@ cd backend
 npm install
 npm start
 
-```
+``` 
 Backend sẽ bắt đầu lắng nghe tại cổng 3000, kết nối Firebase và sẵn sàng nhận luồng stream.
 
 Bước 2: Khởi chạy AI Detector (Python)
