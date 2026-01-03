@@ -1,0 +1,89 @@
+Alerts API Documentation
+
+API quản lý alerts (cảnh báo cháy/khói) của người dùng.
+Mọi endpoint yêu cầu xác thực bằng Firebase Token (verifyToken middleware).
+Mỗi alert được lưu trong subcollection:
+
+users/{uid}/alerts/{alertId}
+
+--------------------------------------
+1. Lấy danh sách alerts
+
+Endpoint:
+GET /api/alerts
+
+Auth:
+Yêu cầu Bearer Token (Firebase ID Token).
+
+Response 200:
+[
+  {
+    "id": "abc123",
+    "cameraId": "cam01",
+    "imageUrl": "https://example.com/image.jpg",
+    "status": "visible",
+    "timestamp": "2025-09-12T11:20:00.123Z"
+  }
+]
+
+Error 500:
+{ "error": "Error fetching alerts" }
+
+--------------------------------------
+2. Tạo alert mới
+
+Endpoint:
+POST /api/alerts
+
+Body:
+{
+  "cameraId": "cam01",
+  "imageUrl": "https://example.com/image.jpg"
+}
+
+Response 200:
+{ "id": "abc123" }
+
+Error 500:
+{ "error": "Error saving alert" }
+
+--------------------------------------
+3. Xoá mềm 1 alert
+
+Endpoint:
+PATCH /api/alerts/:id
+
+Params:
+- id – ID của alert cần xoá mềm.
+
+Response 200:
+{ "message": "Alert disabled successfully" }
+
+Error 500:
+{ "error": "Error disabling alert" }
+
+--------------------------------------
+4. Xoá mềm nhiều alerts
+
+Endpoint:
+PATCH /api/alerts
+
+Body:
+{
+  "alertIds": ["id1", "id2", "id3"]
+}
+
+Response 200:
+{ "message": "Disabled 3 alerts successfully" }
+
+Error 400:
+{ "error": "alertIds must be a non-empty array" }
+
+Error 500:
+{ "error": "Error disabling alerts" }
+
+--------------------------------------
+Ghi chú:
+- status mặc định của alert khi tạo là "visible".
+- Xoá mềm = cập nhật status: "disabled". Không xoá dữ liệu vĩnh viễn.
+- Timestamp được lưu bằng new Date() khi tạo alert.

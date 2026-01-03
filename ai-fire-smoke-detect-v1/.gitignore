@@ -1,0 +1,8 @@
+node_modules/
+# Environment
+.env
+# Firebase credentials
+backend/serviceAccountKey.json
+
+backend/test/img/test_webcam/
+backend/uploads/

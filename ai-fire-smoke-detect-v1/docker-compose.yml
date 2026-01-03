@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    container_name: backend
+    ports:
+      - "3000:3000"
+    environment:
+      DETECTOR_URL: "http://detector:8000/detect"
+    depends_on:
+      - detector
+    volumes:
+      - ./backend:/app
+    restart: always
+
+  detector:
+    build: ./detector
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./detector:/app
+    restart: always
+#docker-compose up --build

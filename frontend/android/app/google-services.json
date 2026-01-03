@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "324180536557",
+    "project_id": "ai-detect-fire-smoke",
+    "storage_bucket": "ai-detect-fire-smoke.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324180536557:android:556d7dba057cabb55770e4",
+        "android_client_info": {
+          "package_name": "com.example.frontend"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyChxtUNejw_Kgb__ijDaJEv0j6yqAkC6Lo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

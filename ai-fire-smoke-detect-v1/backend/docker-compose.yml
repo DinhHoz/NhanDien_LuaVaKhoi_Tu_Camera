@@ -1,0 +1,12 @@
+version: "3.9"
+services:
+  backend:
+    build:
+      context: .
+      target: dev   # <--- mặc định chạy dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app        # mount code vào container
+      - /app/node_modules  # tránh ghi đè node_modules
+    command: npm run dev

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Firebase Auto Login</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+      }
+      .result-box {
+        margin-top: 15px;
+        background: #f8f8f8;
+        padding: 10px;
+        border-radius: 6px;
+        word-wrap: break-word;
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        margin: 6px 0;
+      }
+      .row span {
+        font-weight: bold;
+        margin-right: 8px;
+      }
+      .row input {
+        flex: 1;
+        margin-right: 5px;
+        padding: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h2>🔥 Firebase Auto Login</h2>
+      <p>Trang này sẽ tự động đăng nhập bằng tài khoản mặc định.</p>
+
+      <div class="result-box" id="resultBox" style="display:none;">
+        <div class="row">
+          <span>UID:</span>
+          <input type="text" id="uidField" readonly />
+          <button onclick="copyToClipboard('uidField')">Copy</button>
+        </div>
+        <div class="row">
+          <span>Token:</span>
+          <input type="text" id="tokenField" readonly />
+          <button onclick="copyToClipboard('tokenField')">Copy</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+      import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-auth.js";
+      import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-analytics.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyCiJXHAp2x2i_z2iLQvx9DEruDQ6F6PN68",
+        authDomain: "ai-detect-fire-smoke.firebaseapp.com",
+        projectId: "ai-detect-fire-smoke",
+        storageBucket: "ai-detect-fire-smoke.firebasestorage.app",
+        messagingSenderId: "324180536557",
+        appId: "1:324180536557:web:95a6bc490f068f565770e4",
+        measurementId: "G-4RGMDK9BZL"
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const analytics = getAnalytics(app);
+
+      // Auto login ngay khi mở trang
+      window.addEventListener("load", async () => {
+        const email = "admin@gmail.com";
+        const password = "123456";
+
+        try {
+          const userCredential = await signInWithEmailAndPassword(auth, email, password);
+          const token = await userCredential.user.getIdToken();
+          const uid = userCredential.user.uid;
+
+          document.getElementById('uidField').value = uid;
+          document.getElementById('tokenField').value = token;
+          document.getElementById('resultBox').style.display = "block";
+
+          console.log("✅ UID:", uid);
+          console.log("✅ Token:", token);
+        } catch (error) {
+          console.error("❌ Auto login thất bại:", error.message);
+          alert("Đăng nhập thất bại: " + error.message);
+        }
+      });
+
+      // Copy helper
+      window.copyToClipboard = function (id) {
+        const input = document.getElementById(id);
+        input.select();
+        input.setSelectionRange(0, 99999);
+        navigator.clipboard.writeText(input.value).then(() => {
+          //alert(id + " copied!");
+        });
+      };
+    </script>
+  </body>
+</html>
