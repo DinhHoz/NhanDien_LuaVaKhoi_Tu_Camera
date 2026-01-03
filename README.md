@@ -15,6 +15,9 @@ Hệ thống hoạt động theo mô hình **Client-Server-Worker** phân tán �
 * **Central Backend (Node.js/Express):** Đóng vai trò là "Hub" trung tâm, điều phối toàn bộ API, quản lý Firebase Firestore và xử lý luồng Media (FFmpeg).
 * **Worker Node (Edge Computing):** Chạy độc lập trên các máy trạm để lấy frame từ Backend và đẩy sang AI, giúp hệ thống có thể mở rộng (Scale) thêm hàng trăm camera mà không làm treo server chính.
 * **Cross-Platform Clients:** Bao gồm Web Dashboard (quản lý tập trung) và Mobile App (giám sát di động và nhận thông báo khẩn).
+### Kiến trúc tổng quan
+
+![Kiến trúc tổng quan](docs/images/kientrucTongQuan.png)
 
 ---
 
@@ -107,3 +110,45 @@ node worker.js
 * **Mạng:** Đảm bảo link RTSP của Camera có thể truy cập được từ máy chủ chạy Backend.
 
 ---
+## Giao diện hệ thống RabbitFire (Web Dashboard)
+
+### Giao diện Dashboard tổng quan hệ thống RabbitFire
+
+![Giao diện Dashboard tổng quan hệ thống RabbitFire](docs/images/giaodienDashboardTongquan.png)
+
+### Giao diện xem camera thời gian thực
+
+![Giao diện xem camera thời gian thực](docs/images/giaoDienXemCamera.png)
+
+### Giao diện lịch sử cảnh báo
+
+![Giao diện lịch sử cảnh báo](docs/images/giaoDienLichSuCanhBao.png)
+
+### Giao diện quản lý nhân viên
+
+![Giao diện quản lý nhân viên](docs/images/giaoDienQuanLyNhanVien.png)
+
+### Giao diện quản lý Camera
+
+![Giao diện quản lý Camera](docs/images/giaoDienQuanLyCamera.png)
+
+### Giao diện danh sách thông báo
+
+![Giao diện danh sách thông báo](docs/images/giaoDienDanhSachThongBao.png)
+
+
+
+## Giao diện hệ thống RabbitFire (Mobile App)
+
+### Giao diện camera trên Mobile
+
+![Giao diện camera trên Mobile](docs/images/giaoDienCameraMobile.png)
+
+### Giao diện màn hình thông tin cá nhân của người dùng
+
+![Giao diện màn hình thông tin cá nhân của người dùng](docs/images/giaoDienThongTinCaNhan.png)
+
+
+### Giao diện màn hình danh sách thông báo  trên Mobile
+
+![Giao diện màn hình danh sách thông báo](docs/images/giaoDienDanhSachThongBaoMobile.png)
